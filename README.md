@@ -12,7 +12,7 @@ Welcome to the WhatsThePlan Discord Bot! This Elixir-based bot, made with [Nostr
 
 To use the WhatsThePlan Discord Bot, follow these simple steps:
 
-1. Invite the WhatsThePlan bot to your Discord server using the provided invite link.
+1. Invite the WhatsThePlan bot to your Discord server using this [link](https://bit.ly/whats_the_plan).
 2. Use the `/select` command with the list of options you want to choose from and, if needed, specify the separator. For example:
 
     ![Simple /select command](images/simple.png)
