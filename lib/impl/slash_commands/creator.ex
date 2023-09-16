@@ -9,7 +9,7 @@ defmodule WTP.Impl.SlashCommands.Creator do
   @type command :: ApplicationCommand.application_command_map()
 
   def start(guild_ids) do
-    if Mix.env() == :prod do
+    if Application.get_env(:wtp, :environment) == :prod do
       create()
     else
       create(guild_ids)

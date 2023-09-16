@@ -1,0 +1,2 @@
+config :wtp,
+  environment: :prod
