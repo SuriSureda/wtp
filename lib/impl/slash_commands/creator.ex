@@ -101,8 +101,14 @@ defmodule WTP.Impl.SlashCommands.Creator do
           %{
             type: ApplicationCommandOptionType.string(),
             name: "list",
-            description: "Game List (names separated by commas)",
+            description: "Game list (names separated by space or specify the separator)",
             required: true
+          },
+          %{
+            type: ApplicationCommandOptionType.string(),
+            name: "separator",
+            description: "Separator used in the game list",
+            required: false
           }
         ]
       }

@@ -9,11 +9,19 @@ defmodule WTP.Impl.SlashCommands.Handlers.Select do
   end
 
   defp process_command(
-         %{data: %SlashCommandInteraction{options: [%{name: "list", value: opts_string_list}]}} =
+         %{
+           data: %SlashCommandInteraction{
+             options: [
+               %{name: "list", value: opts_string_list} | other_options
+             ]
+           }
+         } =
            interaction
        ) do
+    separator = get_separator_from_options(other_options)
+
     opts_string_list
-    |> String.split(",", trim: true)
+    |> String.split(separator, trim: true)
     |> pick_random_option()
     |> send_response(interaction)
   end
@@ -24,6 +32,19 @@ defmodule WTP.Impl.SlashCommands.Handlers.Select do
   defp pick_random_option(opt_list) do
     Enum.random(opt_list)
   end
+
+  defp get_separator_from_options(options) do
+    default_separator = %{value: " "}
+
+    options
+    |> Enum.find(default_separator, fn option -> option.name === "separator" end)
+    |> Map.get(:value)
+    |> format_separator()
+  end
+
+  # Seems that either Discord API or Nostrum sanitized input, so this does not take effect. Left in case
+  defp format_separator(" " = separator), do: separator
+  defp format_separator(separator), do: String.trim(separator)
 
   defp send_response(picked_option, interaction) do
     # Give some time
